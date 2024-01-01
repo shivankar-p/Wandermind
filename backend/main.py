@@ -50,6 +50,39 @@ def generate_itinerary():
     except Exception as e:
         return jsonify({'error': str(e)}), 500
     
+@app.route('/assistant', methods=['POST', 'OPTIONS'])
+def assistant():
+    if request.method == 'OPTIONS':
+        # Handle preflight OPTIONS request
+        headers = {
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'POST',
+            'Access-Control-Allow-Headers': 'Content-Type',
+        }
+        return ('', 204, headers)
+
+    try:
+        # Get the prompt from the request
+        data = request.get_json()['messages']
+        print(data)
+
+        # Make a request to the OpenAI API
+        response = client.chat.completions.create(
+            model="gpt-3.5-turbo",
+            messages=data
+        )
+
+
+
+        gen_response = response.choices[0].message.content
+
+        print(gen_response)
+
+        return jsonify({'generated_response': gen_response})
+
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+    
 @app.route('/update_itinerary', methods=['POST', 'OPTIONS'])
 def update_itinerary():
     if request.method == 'OPTIONS':

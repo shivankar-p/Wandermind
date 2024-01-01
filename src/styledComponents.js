@@ -320,7 +320,6 @@ const ButtonContainer = styled.div`
 `;
 
 
-
 const InterestsContainerNew = styled.div`
   display: flex;
   flex-direction: row;

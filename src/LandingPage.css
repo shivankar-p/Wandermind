@@ -1,0 +1,140 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden;
+  }
+  
+  .landing-page {
+    position: relative;
+    height: 100vh;
+    overflow: hidden;
+  }
+  
+  #video-bg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: -1;
+  }
+  
+  .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 165, 0, 0.6); /* Adjust the alpha (last value) for the overlay color and opacity */
+  }
+  
+  .content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: white;
+    z-index: 1;
+  }
+  
+  .top-area {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between; /* Add this line to right-align the social icons */
+      width: calc(100% - 200px); /* Adjust the width to leave some space on both sides */
+      z-index: 2; /* Ensure top area is above video and overlay */
+    }
+  
+  .logo {
+    margin-right: auto;
+  }
+  
+  .social-icons {
+    display: flex;
+    align-items: center;
+  }
+  
+  /* Example Social Icons (Replace with your own) */
+  .social-icons img {
+    width: 30px;
+    height: 30px;
+    margin-left: 15px;
+  }
+  
+  .content h1 {
+      font-size: 2.5em; /* Adjust the size as needed */
+      font-weight: bold;
+      color: #fff; /* Adjust the color as needed */
+    }
+  
+    .content h2 {
+      font-size: 2em; /* Adjust the size as needed */
+      font-weight: bold;
+      color: #fff; /* Adjust the color as needed */
+    }
+  
+  /* ... Other styles */
+  
+  .trending-places {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    opacity: 1;
+    color: white;
+  }
+  
+    
+    .places-container {
+      display: flex;
+      animation: scrollAnimation 20s linear infinite;
+      white-space: nowrap;
+      overflow: hidden;
+    }
+    
+    @keyframes scrollAnimation {
+      0%, 100% {
+        transform: translateX(100%);
+        opacity: 0;
+      }
+      5%, 95% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateX(-100%);
+        opacity: 0;
+      }
+    }
+    
+    .place {
+      flex: 0 0 auto;
+      padding: 0 30px;
+      transition: opacity 0.5s ease-in-out; /* Add transition for opacity */
+    }
+
+    .next-button {
+        background-color: darkorange; /* Change the background color as needed */
+        color: white;
+        border: none;
+        padding: 15px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        border-radius: 50%; /* Make it circular */
+        cursor: pointer;
+      }
+    
+      .next-button:hover {
+        background-color: orange; /* New background color on hover */
+      }
+    /* ... Other styles */
