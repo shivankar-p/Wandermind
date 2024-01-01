@@ -5,6 +5,9 @@ import { ReactMarkdown } from "react-markdown/lib/react-markdown";
 
 import { Button, ResponseContainer, ResponseTitle,
         ResponseText,ButtonContainer} from "./styledComponents";   
+import Itineraryinfo from "./components/info";
+import './response.css';
+
 // Button component
 const ActionButton = styled.button`
   padding: 8px 16px;
@@ -42,18 +45,20 @@ const GenerateButton = ({ loading, onClick }) => (
   );
 
 const ReGenerateButton = ({ loading, onClick }) => (
-  <Button style={{ backgroundColor: '#28a745', marginTop: '20px'}}onClick={onClick} disabled={loading}>
+  <Button style={{ backgroundColor: '#28a745', marginTop: '20px', marginBottom: '110px '}}onClick={onClick} disabled={loading}>
     {loading ? "Please wait..." : "ReGenerate"}
   </Button>
 );
 
-
 const ResponseData = ({ response }) => {
   return (
+    <>
+    <Itineraryinfo/>
     <ResponseContainer>
       <ResponseTitle>
-        <span role="img" aria-label="emoji"></span> Your travel plan is ready 🎉
+        Your travel plan is ready 🎉
       </ResponseTitle>
+      <p>You can find the recommended hotels <a href="http://127.0.0.1:5000/hotels">here</a></p>
       <ResponseText>
         <ReactMarkdown>{response}</ReactMarkdown>
       </ResponseText>
@@ -78,6 +83,7 @@ const ResponseData = ({ response }) => {
         </ActionButton>
       </ButtonContainer>
     </ResponseContainer>
+    </>
   );
 };
 

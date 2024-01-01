@@ -207,8 +207,7 @@ const ResponseText = styled.div`
   font-weight: normal;
   color: #fff;
   border-radius: 0.4rem;
-  padding: 1rem;
-  margin: 2rem;
+  margin-top: 0;
   @media (max-width: 768px) {
     width: calc(100% - 2rem);
     font-size: 0.9rem;

@@ -46,7 +46,7 @@ import PopupChatbot from "./assistant";
 
 const Main = ({ loading, response }) => (
     <MainContent>
-      <Title>⭐️ Wandermind ⭐️</Title>
+      {! response && <Title>⭐️ Wandermind ⭐️</Title>}
       {!response && <Subtitle>Fill the form to generate your itinerary</Subtitle>}
   
       {loading ? <Loading /> : response && <ResponseData response={response} />}
@@ -182,8 +182,7 @@ const handleChange = (e) => {
     Please provide a detailed itinerary with daily recommendations for ${values.tripDuration} days, including suggested destinations, activities, and dining options. 
     The itinerary should be written in ${values.language} and have day-wise itinerary with a title for each day and time for each activity proposed in a day. 
     only give markdown output. 
-    Strictly Format the output using Markdown follwing the below format:
-    [place_name] Travel Itinerary \n
+    Strictly start with day-1 in the output. Format the output using Markdown follwing the below format:
     [day_no]: title \n
       [time]: activity 1 description - [budget] \n
       [time]: activity 2 description - [budget] \n

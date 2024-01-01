@@ -49,7 +49,7 @@ body, html {
       display: flex;
       align-items: center;
       justify-content: space-between; /* Add this line to right-align the social icons */
-      width: calc(100% - 200px); /* Adjust the width to leave some space on both sides */
+      width: calc(100% - 50px); /* Adjust the width to leave some space on both sides */
       z-index: 2; /* Ensure top area is above video and overlay */
     }
   
