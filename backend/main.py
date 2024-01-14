@@ -27,6 +27,9 @@ def generate_itinerary():
         prompts = data['prompts']
         responses = data['responses']
 
+        print(len(prompts))
+        print(len(responses))
+
         messages = [
             {"role": "system", "content": "You are a helpful travel assistant."},
         ]     
@@ -36,6 +39,7 @@ def generate_itinerary():
             if(i != len(prompts)-1):
                 messages.append({"role": "assistant", "content": responses[i]})
         
+        print(messages)
 
         # Make a request to the OpenAI API
         response = client.chat.completions.create(

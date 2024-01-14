@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import HotelCard from './HotelCard';
 import getHotelData from '../api';
+import Header from './Header';
 
 const HotelList = () => {
   const [hotelData, setHotelData] = useState([]);
@@ -18,6 +19,7 @@ const HotelList = () => {
 
   return (
     <div>
+      <Header></Header>
       {hotelData.map((hotel) => (
         <HotelCard key={hotel.HotelBookingCode} hotel={hotel} />
       ))}

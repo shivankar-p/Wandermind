@@ -46,10 +46,10 @@ import PopupChatbot from "./assistant";
 
 const Main = ({ loading, response }) => (
     <MainContent>
-      {! response && <Title>⭐️ Wandermind ⭐️</Title>}
-      {!response && <Subtitle>Fill the form to generate your itinerary</Subtitle>}
+      {/* {! response && <Title>⭐️ Wandermind ⭐️</Title>}
+      {!response && <Subtitle>Fill the form to generate your itinerary</Subtitle>} */}
   
-      {loading ? <Loading /> : response && <ResponseData response={response} />}
+      {loading ? <Loading /> : !response && <ResponseData response={response} />}
     </MainContent>
   );
 
