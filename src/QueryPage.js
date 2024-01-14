@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { ReactMarkdown } from "react-markdown/lib/react-markdown";
+import Dictaphone from "./speech";
 import styled from "styled-components";
 import axios from 'axios';
 import {
@@ -54,6 +55,8 @@ const Main = ({ loading, response }) => (
   );
 
 const QueryPage = () => {
+
+    
     const [loading, setLoading] = useState(false);
     const [response, setResponse] = useState("");
     const [values, setValues] = useState(defaultValues);
@@ -63,6 +66,15 @@ const QueryPage = () => {
       options.languages[0]
     );
   
+    console.log(response);
+
+    const handleDictaphoneTranscript = (transcript) => {
+      setValues((prevState) => ({
+        ...prevState,
+        feedback: transcript,
+      }));
+    };
+
     const handleCuisineTypeClick = (cuisineType) => {
       if (selectedCuisineTypes.includes(cuisineType)) {
         setSelectedCuisineTypes(
@@ -462,7 +474,7 @@ const RegenerateItinerary = () => {
                   </LanguageSelectorContainer>
                   
       
-                  {response == "" && (
+                  {response != "" && (
                     <GenerateButton
                     loading={loading}
                     type="submit"
@@ -471,36 +483,36 @@ const RegenerateItinerary = () => {
                   ></GenerateButton>
                   )
                   }
+
+                {response == "" && (
+                  <div style={{ display: 'flex', alignItems: 'center' }}>
+                    <div style={{ flex: 1 }}>
+                      <Label htmlFor="feedback">
+                        Feedback
+                        <p
+                          style={{
+                            display: "inline-block",
+                            fontSize: "10px",
+                            color: "#666",
+                          }}
+                        ></p>
+                      </Label>
+                      <Input
+                        type="text"
+                        id="feedback"
+                        name="feedback"
+                        value={values.feedback}
+                        onChange={handleChange}
+                        required
+                      />
+                    </div>
+                    <div>
+                      <Dictaphone onTranscriptChange={handleDictaphoneTranscript}/>
+                    </div>
+                  </div>
+                )}    
       
-                  {response != "" && (
-                    <Label htmlFor="feedback">
-                    Feedback
-                    <p
-                      style={{
-                        display: "inline-block",
-                        fontSize: "10px",
-      
-                        color: "#666",
-                      }}
-                    >
-                    </p>
-                  </Label>
-                  )
-                  }
-      
-                  {response != "" && (
-                    <Input
-                    type="text"
-                    id="feedback"
-                    name="feedback"
-                    value={values.feedback}
-                    onChange={handleChange}
-                    required
-                  />
-                  )
-                  }
-      
-                  {response != "" && (
+                  {response == "" && (
                     <ReGenerateButton
                     loading={loading}
                     type="submit"
@@ -520,3 +532,4 @@ const RegenerateItinerary = () => {
         );
 };
 export default QueryPage;
+

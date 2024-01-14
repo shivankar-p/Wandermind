@@ -1,0 +1,17 @@
+.next-button {
+    background-color: darkorange; /* Change the background color as needed */
+    color: white;
+    border: none;
+    padding: 8px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin-top: 15px;
+    border-radius: 50%; /* Make it circular */
+    cursor: pointer;
+  }
+
+.next-button.clicked {
+    background-color: gray;
+}
