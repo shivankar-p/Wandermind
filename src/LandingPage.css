@@ -2,13 +2,13 @@ body, html {
     margin: 0;
     padding: 0;
     height: 100%;
-    overflow: hidden;
+    overflow: auto;
   }
   
   .landing-page {
     position: relative;
     height: 100vh;
-    overflow: hidden;
+    overflow: auto;
   }
   
   #video-bg {

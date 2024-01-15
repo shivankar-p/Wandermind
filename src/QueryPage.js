@@ -66,14 +66,17 @@ const QueryPage = () => {
       options.languages[0]
     );
   
-    console.log(response);
 
     const handleDictaphoneTranscript = (transcript) => {
-      setValues((prevState) => ({
-        ...prevState,
-        feedback: transcript,
-      }));
+      // Check if the current transcript is different from the previous one
+      if (transcript !== values.feedback) {
+        setValues((prevState) => ({
+          ...prevState,
+          feedback: transcript,
+        }));
+      }
     };
+    
 
     const handleCuisineTypeClick = (cuisineType) => {
       if (selectedCuisineTypes.includes(cuisineType)) {

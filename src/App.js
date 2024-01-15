@@ -14,7 +14,7 @@ const App = () => {
     <Router>
       <Routes>
         <Route path="/" element={<LandingPage />} />
-        <Route path="/query" element={<Timeline />} />
+        <Route path="/query" element={<QueryPage />} />
         <Route path="/auth" element={<GoogleAuth />} />
         <Route path="/hotels" element={<HotelList />} />
       </Routes>
