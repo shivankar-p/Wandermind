@@ -1,7 +1,48 @@
-import React from "react"
+import React, { useRef, useState, useEffect } from "react"
 import { Chrono } from "react-chrono";
+import DraggableItem from "./DraggableItem";
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
+
 
 const Timeline = () => {
+  
+  const [items, setItems] = useState([
+    {
+      id: "dumid",
+      title: "14th January",
+      cardTitle: "Day1 - Exploring London",
+      media: {
+        type: 'IMAGE',
+        source: {
+          url: 'https://images.pexels.com/photos/460672/pexels-photo-460672.jpeg?auto=compress&cs=tinysrgb&w=800',
+        },
+      },
+      items: [
+        { cardTitle: 'Morning', cardDetailedText: 'morning desc1' },
+        { cardTitle: 'Afternoon', cardDetailedText: 'afternoon desc1' },
+        { cardTitle: 'Evening', cardDetailedText: 'evening desc1' }
+      ],
+    },
+    {
+      title: "15th January",
+      cardTitle: "Dunkirk",
+      items: [
+        { cardTitle: 'Morning', cardDetailedText: 'morning desc2' },
+        { cardTitle: 'Afternoon', cardDetailedText: 'afternoon desc2' },
+        { cardTitle: 'Evening', cardDetailedText: 'evening desc2' }
+      ],
+    },
+    {
+      title: "16th January",
+      cardTitle: "Dunkirk",
+      items: [
+        { cardTitle: 'Morning', cardDetailedText: 'morning desc3' },
+        { cardTitle: 'Afternoon', cardDetailedText: 'afternoon desc3' },
+        { cardTitle: 'Evening', cardDetailedText: 'evening desc3' }
+      ],
+    },
+  ]);
 
   //this will be api response
   const response = {
@@ -26,6 +67,7 @@ const Timeline = () => {
   }
 
 //   const items = [{
+//     id: "dumid",
 //     title: "14th January",
 //     cardTitle: "Day1 - Exploring London",
 //     media: {
@@ -69,40 +111,104 @@ const Timeline = () => {
 //   },
 // ];
 
-  const items = [];
+  // const items = [];
 
-  for (const [date, details] of Object.entries(response)) {
-    const item = {
-      title: date,
-      cardTitle: details.title,
-      media: {
-        type: 'IMAGE',
-        source: {
-          url: 'https://images.pexels.com/photos/460672/pexels-photo-460672.jpeg?auto=compress&cs=tinysrgb&w=800',
-        },
-      },
-      items: []
-    };
+  // for (const [date, details] of Object.entries(response)) {
+  //   const item = {
+  //     title: date,
+  //     cardTitle: details.title,
+  //     media: {
+  //       type: 'IMAGE',
+  //       source: {
+  //         url: 'https://images.pexels.com/photos/460672/pexels-photo-460672.jpeg?auto=compress&cs=tinysrgb&w=800',
+  //       },
+  //     },
+  //     items: []
+  //   };
 
-    //Extract morning, afternoon, and evening details
-    const timesOfDay = ['morning', 'afternoon', 'evening'];
-    timesOfDay.forEach(time => {
-      if (details[time]) {
-        item.items.push({
-          cardTitle: time.charAt(0).toUpperCase() + time.slice(1),
-          cardDetailedText: details[time]
+  //   //Extract morning, afternoon, and evening details
+  //   const timesOfDay = ['morning', 'afternoon', 'evening'];
+  //   timesOfDay.forEach(time => {
+  //     if (details[time]) {
+  //       item.items.push({
+  //         cardTitle: time.charAt(0).toUpperCase() + time.slice(1),
+  //         cardDetailedText: details[time]
+  //       });
+  //     }
+  //   });
+
+  //   items.push(item);
+  // }
+
+  const commonAncestorRef = useRef(null);
+  const [removedItem, setRemovedItem] = useState(null);
+  const [initialMousePosition, setInitialMousePosition] = useState({ x: 0, y: 0 });
+
+
+  useEffect(() => {
+    // This useEffect will run whenever removedItem changes
+    console.log("Removed Item:", removedItem);
+  }, [removedItem]);
+
+
+  const handleClick = (event) => {
+    // Access the clicked element
+    const clickedElement = event.target;
+
+    // Check if the clicked element is a descendant of the common ancestor
+    if (commonAncestorRef.current.contains(clickedElement)) {
+      // Retrieve information about the element (e.g., id, class, text content)
+      const elementClass = clickedElement.className;
+      const elementTextContent = clickedElement.textContent;
+
+      console.log(elementClass.split(" ").pop());
+
+      if(elementClass.split(" ").pop() === "rc-card")
+      {
+        let removedItem = null;
+        setItems(prevItems => {
+          const updatedItems = prevItems.map(item => {
+            const updatedNestedItems = item.items.filter(nestedItem => {
+              return `${nestedItem.cardTitle}${nestedItem.cardDetailedText}` !== elementTextContent;
+            });
+
+             // Check if the item was removed
+        if (updatedNestedItems.length !== item.items.length) {
+          // Find the removed item
+          removedItem = item.items.find(
+            (nestedItem) =>
+              `${nestedItem.cardTitle}${nestedItem.cardDetailedText}` ===
+              elementTextContent
+          );
+          
+        }
+  
+            return { ...item, items: updatedNestedItems };
+          });
+  
+          return updatedItems;
         });
+
+        if (removedItem) {
+          setRemovedItem(removedItem);
+          setInitialMousePosition({ x: event.clientX, y: event.clientY });
+        }
+
       }
-    });
 
-    items.push(item);
-  }
+      console.log('Clicked Element Class:', elementClass);
+      console.log('Clicked Element Text Content:', elementTextContent);
+    }
+  };
 
-  return (
-    <div style={{width: '1200px'}}>
-      <Chrono items={items} mode = "VERTICAL_ALTERNATING" enableOutline/>
+    return (
+    <DndProvider backend={HTML5Backend}>
+    <div ref={commonAncestorRef} onMouseDown={handleClick} style={{width: '1200px', userSelect: 'none'}}>
+      {removedItem && <DraggableItem key="removedItem" item={removedItem} initialMousePosition={initialMousePosition}/>}
+      <Chrono items={items} mode = "VERTICAL_ALTERNATING" allowDynamicUpdate={true} />
     </div>
-  )
+    </DndProvider>
+    );
 }
 
 export default Timeline;
