@@ -45,7 +45,9 @@ import {ActionButton, GenerateButton, ResponseData, ReGenerateButton} from './co
 import logo from './assets/tbo_logo.svg';
 import PopupChatbot from "./assistant";
 import AttachFileIcon from '@mui/icons-material/AttachFile';
-import LoadingIcons from 'react-loading-icons'
+import LoadingIcons from 'react-loading-icons';
+import { Avatar } from "./components/Avatar";
+import PersonIcon from '@mui/icons-material/Person';
 
 const Main = ({ loading, response }) => (
     <MainContent>
@@ -57,7 +59,7 @@ const Main = ({ loading, response }) => (
   );
 
 const QueryPage = () => {
-
+    const [activeavatar, setActiveavatar] = useState(false);
     const [uploading, setUploading] = useState(false);
     const [loading, setLoading] = useState(false);
     const [response, setResponse] = useState("");
@@ -189,7 +191,10 @@ const handleChange = (e) => {
     }));
   };
 
-  
+  const handleavatar = () => {
+    if(activeavatar) setActiveavatar(false);
+    else setActiveavatar(true);
+  }
 
   const handleButtonClick = async () => {
     setUploading(true)
@@ -571,6 +576,10 @@ const RegenerateItinerary = () => {
             </Container>
             <div>
                   <PopupChatbot/>
+                  {/* <button className="next-button" onClick={handleavatar} style={{marginBottom: '15px', display: 'inline-block', textAlign: 'center', textDecoration: 'none'}}>
+                    <PersonIcon/>
+                  </button>
+                  {(activeavatar)?<Avatar/>:(<p></p>)} */}
             </div>
           </>
         );

@@ -9,6 +9,7 @@ import LandingPage from "./LandingPage";
 import QueryPage from "./QueryPage";
 import GoogleAuth from "./components/GoogleAuth";
 import Timeline from "./timeline";
+import { Avatar } from './components/Avatar';
 
 const App = () => {
   return (
@@ -19,6 +20,7 @@ const App = () => {
         <Route path="/auth" element={<GoogleAuth />} />
         <Route path="/hotels" element={<HotelList />} />
         <Route path="/flights" element={<FlightList />} />
+        <Route path="/avatar" element= {<Avatar/>} />
       </Routes>
     </Router>
   );

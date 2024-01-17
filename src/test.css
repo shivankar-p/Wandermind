@@ -1,0 +1,17 @@
+.test{
+    padding:0px;    
+}
+
+.leftcard{
+    padding-top: 5px;
+    padding-right: 5px;
+    padding-bottom: 5px;
+}
+.rightcard{
+    padding-left: 5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+.fullcard{
+    padding: 10px;
+}
