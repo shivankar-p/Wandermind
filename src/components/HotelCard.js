@@ -1,6 +1,7 @@
 // src/components/HotelCard.js
 import React from 'react';
 import './HotelCard.css'; // Import the CSS file for styling
+import DirectionsIcon from '@mui/icons-material/Directions';
 
 const getReadableRating = (rating) => {
     switch (rating) {
@@ -16,6 +17,10 @@ const getReadableRating = (rating) => {
         return 'Not Rated';
     }
   };
+
+  const redirectToPage = (url) => {
+    window.open(url, '_blank')
+  }
 
 const HotelCard = ({ hotel }) => {
   // Helper function to convert numeric rating to stars
@@ -46,6 +51,12 @@ const HotelCard = ({ hotel }) => {
         <h2>{hotel.HotelInfo.HotelName}</h2>
         <p>{hotel.HotelInfo.HotelAddress}</p>
         <p><strong>Rating:</strong> {renderStars(getReadableRating(hotel.HotelInfo.Rating))}</p>
+      </div>
+      <div style={{marginTop: '55px', marginRight: '40%', fontSize: '20px' }}>
+            <button className='directions' onClick={() => redirectToPage(`https://www.google.com/maps?q=${hotel.HotelInfo.Latitude},${hotel.HotelInfo.Longitude}`)}>
+              <DirectionsIcon/>
+              Directions
+            </button>
       </div>
       <div style={{marginTop: '35px', marginRight: '50px', fontSize: '20px' }}>
             <p><strong>{hotel.MinHotelPrice.TotalPrice} $ </strong></p>

@@ -5,6 +5,7 @@
   "dependencies": {
     "@emotion/react": "^11.11.3",
     "@emotion/styled": "^11.11.0",
+    "@iconify/react": "^4.1.1",
     "@mui/icons-material": "^5.15.4",
     "@mui/material": "^5.15.4",
     "@testing-library/jest-dom": "^5.16.5",
@@ -49,5 +50,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.1"
   }
 }
