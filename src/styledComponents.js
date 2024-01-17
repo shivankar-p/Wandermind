@@ -253,8 +253,8 @@ const TopLocationContainer = styled.div`
   justify-content: flex-start;
   align-items: center;
   flex-wrap: wrap;
-
-  margin-top: 0.4rem;
+  margin-bottom: 0.4rem;
+  margin-top: -1rem;
 `;
 
 const LanguageOption = styled.div`

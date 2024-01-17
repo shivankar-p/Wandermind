@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { ReactMarkdown } from "react-markdown/lib/react-markdown";
 import Dictaphone from "./speech";
 import styled from "styled-components";
@@ -44,6 +44,8 @@ import {options, topLocations, defaultValues} from './options';
 import {ActionButton, GenerateButton, ResponseData, ReGenerateButton} from './components';
 import logo from './assets/tbo_logo.svg';
 import PopupChatbot from "./assistant";
+import AttachFileIcon from '@mui/icons-material/AttachFile';
+import LoadingIcons from 'react-loading-icons'
 
 const Main = ({ loading, response }) => (
     <MainContent>
@@ -56,7 +58,7 @@ const Main = ({ loading, response }) => (
 
 const QueryPage = () => {
 
-    
+    const [uploading, setUploading] = useState(false);
     const [loading, setLoading] = useState(false);
     const [response, setResponse] = useState("");
     const [values, setValues] = useState(defaultValues);
@@ -187,6 +189,40 @@ const handleChange = (e) => {
     }));
   };
 
+  
+
+  const handleButtonClick = async () => {
+    setUploading(true)
+    const response = await axios.post('http://127.0.0.1:5000/upload', {url: values.destinationCountry}, {
+      headers: {
+        'Content-Type': 'application/json',
+      }})
+    .then((response) => {
+      console.log(response);
+
+      const locality = response.data['locality'];
+
+      console.log(locality);
+
+      setValues((prevState) => ({
+        ...prevState,
+        destinationCountry: locality || '',
+      }));
+
+      console.log(values.destinationCountry);
+
+      setUploading(false);
+    })
+    .catch((error) => {
+      console.error(error);
+      setLoading(false);
+    });
+
+    console.log();
+  };
+
+
+
   const handleSubmit = (e) => {
     e.preventDefault();
     setLoading(true);
@@ -257,6 +293,7 @@ const RegenerateItinerary = () => {
               </div>
                 <FormContainer onSubmit={handleSubmit}>
                   <Label htmlFor="destinationCountry">Destination Country</Label>
+                  <div style={{alignItems: 'center', display: 'flex', marginTop: '-20px'}}>
                   <Input
                     type="text"
                     placeholder="e.g. San Francisco/USA, Paris/France, Istanbul/Turkey, etc."
@@ -266,6 +303,10 @@ const RegenerateItinerary = () => {
                     onChange={handleChange}
                     required
                   />
+                  <button className="next-button" onClick={handleButtonClick} style={{marginBottom: '15px', display: 'inline-block', textAlign: 'center', textDecoration: 'none'}}>
+                    {(!uploading) ? <AttachFileIcon/> : (<LoadingIcons.TailSpin width={20} height={20}/>)}
+                  </button>
+                  </div>
                   <TopLocationContainer>
                     <Label htmlFor="topDestinations">🔥Top Destionations:</Label>
                     {topLocations.map((location) => (
