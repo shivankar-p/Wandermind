@@ -8,6 +8,7 @@ import { Button, ResponseContainer, ResponseTitle,
 import Itineraryinfo from "./components/info";
 import './response.css';
 import Timeline from "./timeline";
+import TimelineDual from './TimelineDual/timelinedual';
 
 // Button component
 const ActionButton = styled.button`
@@ -64,7 +65,7 @@ const ResponseData = ({ response }) => {
       {/* <ResponseText>
         <ReactMarkdown>{response}</ReactMarkdown>
       </ResponseText> */}
-      <Timeline />
+      <TimelineDual />
       <ButtonContainer>
         <ActionButton
           onClick={() => {
