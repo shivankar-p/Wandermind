@@ -4,7 +4,6 @@ import './timelinedual.css';
 import LeftSide from './LeftSide';
 import RightSide from './RightSide';
 
-
   const response = {
     "14th January": {
       title: "Day 1: Arrival and Exploration",
@@ -43,7 +42,7 @@ const responseToLists = (response) => {
   });
 };
 
-function TimelineDual() {
+function App() {
   const [lists, setLists] = React.useState(responseToLists(response));
   const timeOfDay = ['Morning', 'Afternoon', 'Evening'];
     const onDragEnd = (result) => {
@@ -113,5 +112,5 @@ function TimelineDual() {
     );
 }
 
-export default TimelineDual;
+export default App;
 
