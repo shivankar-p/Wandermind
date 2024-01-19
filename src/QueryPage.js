@@ -49,21 +49,19 @@ import LoadingIcons from 'react-loading-icons';
 import { Avatar } from "./components/Avatar";
 import PersonIcon from '@mui/icons-material/Person';
 
-const Main = ({ loading, response, itinerary, setItinerary, values, setValues }) => (
+const Main = ({ loading, response }) => (
     <MainContent>
-      {console.log(itinerary)}
       {/* {! response && <Title>⭐️ Wandermind ⭐️</Title>}
       {!response && <Subtitle>Fill the form to generate your itinerary</Subtitle>} */}
-      {console.log(loading)}
-      {loading || (itinerary == undefined)? <Loading /> : <ResponseData response={response} itinerary={itinerary} setItinerary = {setItinerary} values={values} setValues={setValues}/>}
-      {/* <Loading /> */}
+  
+      {loading ? <Loading /> : !response && <ResponseData response={response} />}
     </MainContent>
   );
 
 const QueryPage = () => {
     const [activeavatar, setActiveavatar] = useState(false);
     const [uploading, setUploading] = useState(false);
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
     const [response, setResponse] = useState("");
     const [values, setValues] = useState(defaultValues);
     const [selectedInterests, setSelectedInterests] = useState([]);
@@ -71,32 +69,7 @@ const QueryPage = () => {
     const [selectedLanguage, setSelectedLanguage] = useState(
       options.languages[0]
     );
-    const [itinerary, setItinerary] = useState({
-      "14th January": {
-        title: "Day 1: Arrival and Exploration",
-        morning: "After arriving in London, check into your hotel and freshen up.",
-        afternoon: "Take rest sleep well and relax",
-        evening: "Explore Covent Garden, a vibrant district known for its street performers, boutique shops, and bustling markets. Take a leisurely walk through the area and immerse yourself in the lively atmosphere. Enjoy a traditional British dinner at The Ivy, renowned for its classic menu and elegant ambiance."
-      },
-      "15th January": {
-        title: "Day 2: Historical Landmarks and Architectural Marvels",
-        morning: "...",
-        afternoon: "...",
-        evening: "..."
-      },
-      "16th January": {
-        title: "Day 3: Outdoor Activities and Shopping",
-        morning: "...",
-        afternoon: "...",
-        evening: "..."
-      }
-    });
-
-    useEffect(() => {
-      handleSubmit();
-      // console.log(lists);
-      // console.log(listsToResponse(lists));
-    }, []);
+  
 
     const handleDictaphoneTranscript = (transcript) => {
       // Check if the current transcript is different from the previous one
@@ -256,38 +229,22 @@ const handleChange = (e) => {
 
 
   const handleSubmit = (e) => {
-    // e.preventDefault();
+    e.preventDefault();
     setLoading(true);
     let prompt = `Generate a personalized travel itinerary for a trip to ${values.destinationCountry} with a budget of ${values.budget}. 
     The traveler is interested in a ${values.travelStyle} vacation and enjoys ${values.interestsNew}. 
     They are looking for ${values.accommodationType} accommodations and prefer ${values.transportationType} transportation. 
     The itinerary should include ${values.activityType} activities and ${values.cuisineType} dining options. 
-    Please provide a detailed itinerary with daily recommendations for ${values.tripDuration} days from ${values.startDate}, including suggested destinations, activities, and dining options. 
-    The itinerary should be written in ${values.language} and itinerary should be returned in a day-wise format.
-    For example:
-    If destination is london and user is going for a 3 day trip from 14th to 17th January. The json should be as follows:
-    {
-      "14th January": {
-        title: "Day 1: Arrival and Exploration",
-        morning: "After arriving in London, check into your hotel and freshen up.",
-        afternoon: "Take rest sleep well and relax",
-        evening: "Explore Covent Garden, a vibrant district known for its street performers, boutique shops, and bustling markets. Take a leisurely walk through the area and immerse yourself in the lively atmosphere. Enjoy a traditional British dinner at The Ivy, renowned for its classic menu and elegant ambiance."
-      },
-      "15th January": {
-        title: "Day 2: Historical Landmarks and Architectural Marvels",
-        morning: "...",
-        afternoon: "...",
-        evening: "..."
-      },
-      "16th January": {
-        title: "Day 3: Outdoor Activities and Shopping",
-        morning: "...",
-        afternoon: "...",
-        evening: "..."
-      }
-    }
-    This json format is really important and follow it as an SOP. Ensure that content of each of morning, afternoon, evening is consiced to 2-3 lines. 
-    I will run JSON.parse on the response you are returning. so please ensure its a valid json`;
+    Please provide a detailed itinerary with daily recommendations for ${values.tripDuration} days, including suggested destinations, activities, and dining options. 
+    The itinerary should be written in ${values.language} and have day-wise itinerary with a title for each day and time for each activity proposed in a day. 
+    only give markdown output. 
+    Strictly start with day-1 in the output. Format the output using Markdown follwing the below format:
+    [day_no]: title \n
+      [time]: activity 1 description - [budget] \n
+      [time]: activity 2 description - [budget] \n
+      ....
+      Ensure activites under day are indented and formatted as bullet points and assign proper headers to main title and day titles. 
+      Also Ensure that above times, budgets are in bold and highlight key places in bold as well using markdown`;
     values.feedbacks.push(prompt);
     axios.post('http://127.0.0.1:5000/generate_itinerary', { prompts: values.feedbacks, responses: values.responses }, {
       headers: {
@@ -295,13 +252,9 @@ const handleChange = (e) => {
       },
     })
       .then((response) => {
-        console.log(response.data.generated_response);
-        setItinerary(JSON.parse(response.data.generated_response));
-        //values.responses.push(response.data.generated_response);
-        setValues((prevValues) => ({
-          ...prevValues,
-          responses: [...prevValues.responses, response.data.generated_response],
-        }));
+        console.log(response);
+        values.responses.push(response.data.generated_response);
+        setResponse(response.data.generated_response);
         setLoading(false);
       })
       .catch((error) => {
@@ -334,14 +287,10 @@ const RegenerateItinerary = () => {
     return (
           <>
           <Container>
-            <Main
+            {/* <Main
                 loading={loading}
                 response={response}
-                itinerary={itinerary}
-                setItinerary={setItinerary}
-                values={values}
-                setValues={setValues}
-              />
+              /> */}
 
               <Panel>
               <div style={{marginRight: '1px'}}>
@@ -421,8 +370,8 @@ const RegenerateItinerary = () => {
                       />
                     </FormGroup>
                   </FormRow>
-                  <Label htmlFor="interests" style={{marginTop: '-20px'}}>Interests</Label>
-                  <InterestsContainerNew style={{marginTop: '-20px'}}>
+                  <Label htmlFor="interests">Interests</Label>
+                  <InterestsContainerNew>
                     {options.interestsNew.map((interest, index) => (
                       <InterestItemNew
                         key={index}
@@ -495,10 +444,9 @@ const RegenerateItinerary = () => {
                     value={values.transportationType}
                     onChange={handleChange}
                     required
-                    style={{marginTop: '-20px'}}
                   />
       
-                  <Label htmlFor="activityType" >
+                  <Label htmlFor="activityType">
                     Activity Type
                     <p
                       style={{
@@ -517,7 +465,6 @@ const RegenerateItinerary = () => {
                     multiple
                     value={values.activityType}
                     onChange={handleMultiSelectChange}
-                    style={{marginTop: '-20px'}}
                   >
                     {options.activityTypes.map((option) => (
                       <option key={option} value={option}>
@@ -576,7 +523,7 @@ const RegenerateItinerary = () => {
                   </LanguageSelectorContainer>
                   
       
-                  {/* {response == "" && (
+                  {response != "" && (
                     <GenerateButton
                     loading={loading}
                     type="submit"
@@ -584,12 +531,12 @@ const RegenerateItinerary = () => {
                     className={loading ? "loading" : ""}
                   ></GenerateButton>
                   )
-                  } */}
+                  }
 
-                {true && (
+                {response == "" && (
                   <div style={{ display: 'flex', alignItems: 'center' }}>
                     <div style={{ flex: 1 }}>
-                      <Label htmlFor="feedback" >
+                      <Label htmlFor="feedback">
                         Feedback
                         <p
                           style={{
@@ -609,32 +556,27 @@ const RegenerateItinerary = () => {
                       />
                     </div>
                     <div>
-                      <Dictaphone onTranscriptChange={handleDictaphoneTranscript} style={{marginTop: '40px'}}/>
+                      <Dictaphone onTranscriptChange={handleDictaphoneTranscript}/>
                     </div>
                   </div>
                 )}    
       
-                  {true && (
-                  //   <ReGenerateButton
-                  //   loading={loading}
-                  //   type="submit"
-                  //   disabled={loading}
-                  //   className={loading ? "loading" : ""}
-                  //   onClick={() => RegenerateItinerary()}
-                  // ></ReGenerateButton>
-                  (
-                    <GenerateButton
+                  {response == "" && (
+                    <ReGenerateButton
                     loading={loading}
                     type="submit"
                     disabled={loading}
                     className={loading ? "loading" : ""}
-                  ></GenerateButton>
-                  )
+                    onClick={() => RegenerateItinerary()}
+                  ></ReGenerateButton>
                   )
                   }
                 </FormContainer>
               </Panel>
-              
+              <Main
+                loading={loading}
+                response={response}
+              />
             </Container>
             <div>
                   <PopupChatbot/>

@@ -9,7 +9,7 @@ import InputGroup from 'react-bootstrap/InputGroup';
 
 
 
-const LeftSide = ({ list, timeOfDay, day, handleFeedback }) => (
+const LeftSide = ({ list, timeOfDay }) => (
   <Droppable droppableId={list.id} >
     {(provided) => (
       <div ref={provided.innerRef} {...provided.droppableProps} className="activities">
@@ -23,11 +23,7 @@ const LeftSide = ({ list, timeOfDay, day, handleFeedback }) => (
           <Dropdown.Item href="#">Regenerate</Dropdown.Item>
         </DropdownButton>
         <Form.Control aria-label="Text input with dropdown button" placeholder='Enter your query here' onKeyDown = {(event) => {
-          if(event.key === 'Enter'){
-            //console.log(event.target.value)
-            console.log("fb call")
-            handleFeedback(event.target.value, day);
-          }
+          console.log(event.target.value)
         }}/>
       </InputGroup>
         <div className="title-banner">
@@ -39,6 +35,10 @@ const LeftSide = ({ list, timeOfDay, day, handleFeedback }) => (
           <Draggable draggableId={item.id} index={index} key={item.id}>
             {(provided) => (
               <div ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps} className="activity-box">
+                <a class="close" onClick={(event) => {
+                  console.log(list, item.id)
+                  list.items = list.items.slice(1);
+                }}></a>
                 <h3>{timeOfDay[parseInt(item.id.split('-').pop()) - 1]}</h3>
                 <p>{item.content}</p>
               </div>
