@@ -6,8 +6,8 @@ import dollar from '../assets/dollar.png';
 import lang from '../assets/lang.png';
 
 const Itineraryinfo = () => {
-  const [title, setTitle] = useState('Location');
-  const [desc, setDesc] = useState( 'London is a bustling metropolis with a rich history and diverse culture. Be prepared for crowded attractions and public transportation, especially during peak tourist seasons.');
+  const [title, setTitle] = useState('LOCATION');
+  const [desc, setDesc] = useState( 'Hawaii offers a tranquil tropical escape with breathtaking scenery and a relaxed island vibe.  Be prepared for a relaxed pace of life amid the captivating allure of this Pacific paradise.');
   const [selectedButton, setSelectedButton] = useState('Location');
 
 
@@ -18,9 +18,10 @@ const Itineraryinfo = () => {
   };
 
   return (
-    <div className="img-container">s
+    <div className="img-container">
       <div className="bg-img">
-        <h1 style={{ marginLeft: '600px'}}>Wandermind</h1>
+        <div className="overlay">
+        <h1 style={{ marginLeft: '585px'}}>WANDERMIND</h1>
         <h4 style={{ marginLeft: '635px' }}>AI travel planner</h4>
         <h1 style={{ marginTop: '50px', marginBottom: '50px', marginLeft: '130px', fontSize: '2em' }}>
         3-Day Hawaiian Paradise: Basking in Nature's Beauty and Coastal Adventures
@@ -33,23 +34,23 @@ const Itineraryinfo = () => {
               <h4>{desc}</h4>
             </div>
             <div className="buttons">
-            <button className={`rounded-button ${selectedButton === 'Location' ? 'selected' : ''}`} onClick={() => handleIconClick('Location', 'London is a bustling metropolis with a rich history and diverse culture. Be prepared for crowded attractions and public transportation, especially during peak tourist seasons.')}>
+            <button className={`rounded-button ${selectedButton === 'Location' ? 'selected' : ''}`} onClick={() => handleIconClick('LOCATION','Hawaii offers a tranquil tropical escape with breathtaking scenery and a relaxed island vibe.  Be prepared for a relaxed pace of life amid the captivating allure of this Pacific paradise.')}>
               <img src={pin} alt="Pin icon" />
             </button>
-            <button className={`rounded-button ${selectedButton === 'Weather' ? 'selected' : ''}`} onClick={() => handleIconClick('Weather', 'London has a temperate maritime climate with mild temperatures and regular rainfall throughout the year. Spring temperatures range from 45-60°F (7-15°C) with occasional rain showers.')}>
+            <button className={`rounded-button ${selectedButton === 'Weather' ? 'selected' : ''}`} onClick={() => handleIconClick('WEATHER', 'Hawaii enjoys a year-round tropical climate with warm temperatures ranging from 70-85°F (21-29°C) in spring, featuring consistent rainfall and occasional refreshing showers.')}>
               <img src={weather} alt="Weather icon" />
             </button>
-            <button className={`rounded-button ${selectedButton === 'Price' ? 'selected' : ''}`} onClick={() => handleIconClick('Price', 'The currency in London is the British Pound Sterling (GBP). The average cost of a cup of coffee is around £2.50, which is approximately $3.20 USD.')}>
+            <button className={`rounded-button ${selectedButton === 'Price' ? 'selected' : ''}`} onClick={() => handleIconClick('PRICE', 'The currency in Hawaii is the United States Dollar (USD). The average cost of a cup of coffee is around $4.00 USD, providing a taste of the island flavors with a scenic backdrop.')}>
               <img src={dollar} alt="Dollar icon" />
             </button>
-            <button className={`rounded-button ${selectedButton === 'Language' ? 'selected' : ''}`} onClick={() => handleIconClick('Language', 'English is the dominant language spoken in London.')}>
+            <button className={`rounded-button ${selectedButton === 'Language' ? 'selected' : ''}`} onClick={() => handleIconClick('LANGUAGE', 'English is the dominant language spoken in Hawaii.')}>
               <img src={lang} alt="Language icon" />
             </button>
           </div>
-</div>
-
-      </div>
+          </div>
+        </div>
     </div>
+      </div>
   );
 };
 

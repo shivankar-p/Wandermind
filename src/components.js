@@ -58,10 +58,12 @@ const ResponseData = ({ response }) => {
     <>
     <Itineraryinfo/>
     <ResponseContainer>
+      <br/>
       <ResponseTitle>
-        Your travel plan is ready 🎉
+        TRAVEL ITINERARY
       </ResponseTitle>
-      <p>You can find the recommended hotels <a href="http://127.0.0.1:5000/hotels">here</a></p>
+      
+      <p>Your recommended <a href="http://127.0.0.1:3000/hotels">hotels</a> and <a href="http://127.0.0.1:3000/flights">flights</a>.</p>
       {/* <ResponseText>
         <ReactMarkdown>{response}</ReactMarkdown>
       </ResponseText> */}

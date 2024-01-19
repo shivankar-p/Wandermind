@@ -1,9 +1,8 @@
 .bg-img {
     top: 0;
-    left: 0;
+    right: 0;
     width: 1400px;
     height: 400px;
-    z-index: -1;
     background-image: url(../assets/hawaii.jpeg);
 }
 
@@ -11,23 +10,32 @@
 .bg-img h4 {
   margin: 0;
   padding: 0;
+  opacity: 1;
+  color: #fff;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .title h2 {
     margin: 0;
     padding: 0;
+    color: #fff;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .title {
     margin-top: 5px;
+    color: #fff;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .description h4 {
     margin: 0;
     padding: 0;
+    color: #fff;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 .r-box {
-    width: 800px;
+    width: 900px;
     height: 150px;
     background-color: rgba(255, 165, 0, 0.8);
     border-radius: 40px; /* Adjust the value to change the roundness */
@@ -43,7 +51,8 @@
   .buttons {
     display: flex;
     justify-content: center;
-    margin-bottom: 10px;
+    margin-top: 5px;
+    margin-bottom: 15px;
   }
 
 
@@ -56,6 +65,7 @@
     align-items: center;
     justify-content: center;
     border-radius: 50%;
+    margin-top: 10px;
     margin: 0 5px;
     height: 35px;
     width: 35px;
@@ -64,6 +74,7 @@
     cursor: pointer;
     border-style: solid;
     border-color:#ffff;
+    font-size: 1.2rem;
   }
   
   /* You can add additional styles or hover effects as needed */

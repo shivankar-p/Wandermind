@@ -13,6 +13,11 @@ const Hero = () => {
         navigate("/query");
     }
 
+    const placesData = ["Milano, Italy", "Paris, France", "Dubai, UAE", "Goa, India",  "Madrid, Spain",
+                    "Bali, Indonesia",  "London, UK",  "Bangkok, Thailand",  "Delhi, India",  "Miami, US",
+                    "Rome, Italy",  "Istanbul, Turkey",  "Las Vegas, US",  "Shangai, China",  "Singapore",
+                    "Sydney, Australia",  "Miami, US",  "Amsterdam",  "Tokyo",  "Chennai, India"];
+
     return (
         <>
         <section id="hero">
@@ -44,7 +49,17 @@ const Hero = () => {
                   <span class="left-pan"><i class="fa fa-microphone"></i></span>
                 </div>
     </div>
+    <h3>Trending Places:</h3>
+        <div className="places-container">
+          {placesData.map((place, index) => (
+            <div key={index} className="place">
+              <h2>{place}</h2>
+            </div>
+          ))}
+        </div>
   </section>
+  
+
 
   </>
     );

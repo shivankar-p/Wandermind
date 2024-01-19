@@ -291,7 +291,6 @@ const RegenerateItinerary = () => {
                 loading={loading}
                 response={response}
               /> */}
-
               <Panel>
               <div style={{marginRight: '1px'}}>
               <img src={logo} alt="Logo" width="180" height="90" />
