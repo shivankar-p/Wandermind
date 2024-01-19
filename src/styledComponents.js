@@ -25,6 +25,7 @@ const Container = styled.div`
 const MainContent = styled.div`
   margin-left:auto;
   margin-right:-13px;
+  right:0;
   flex-basis: 70%;
   display: flex;
   flex-direction: column;
@@ -68,6 +69,8 @@ const MainContent = styled.div`
     height: auto;
     min-height: 50px;
     overflow-x: hidden;
+  }
+  overflow-x: hidden;
 `;
 
 const Title = styled.h1`
@@ -202,6 +205,8 @@ const ResponseContainer = styled.div`
 const ResponseTitle = styled.h2`
   font-size: 1.5rem;
   font-weight: normal;
+  color: #fff;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 `;
 
 const ResponseText = styled.div`
@@ -372,7 +377,7 @@ const Panel = styled.div`
   border: 1px solid #ccc;
   background-color: #fff;
   position: fixed;
-  width: 28%;
+  width: 30%;
   top: 0;
   left: 0;
   overflow-y: auto;

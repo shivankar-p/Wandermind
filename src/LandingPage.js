@@ -23,8 +23,9 @@ const placesData = ["Milano, Italy", "Paris, France", "Dubai, UAE", "Goa, India"
                     "Sydney, Australia",  "Miami, US",  "Amsterdam",  "Tokyo",  "Chennai, India"];
   return (
     <>
+    <Nav></Nav>
     <Hero />
-    {/* <div className="landing-page">
+     {/* <div className="landing-page">
       <div className="top-area">
         <div className="logo">
           <img src={logo} alt="Logo" width="200" height="100" />
@@ -51,18 +52,8 @@ const placesData = ["Milano, Italy", "Paris, France", "Dubai, UAE", "Goa, India"
           <img src={arrowIcon} alt="Next" width="25" height="25"/>
         </button>
         </Link>
-      </div>
-      <div className="trending-places">
-        <h3>Trending Places:</h3>
-        <div className="places-container">
-          {placesData.map((place, index) => (
-            <div key={index} className="place">
-              <h2>{place}</h2>
-            </div>
-          ))}
-        </div>
-        </div>
-    </div> */}
+      </div> */}
+    {/* </div>  */}
     </>
   );
 };

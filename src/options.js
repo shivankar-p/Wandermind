@@ -91,13 +91,15 @@ const options = {
 
   var defaultValues = {
     destinationCountry: "Hawaii",
+    budget: "3000 USD",
+    destinationCountry: "Hawaii",
     budget: "250 USD",
     travelStyle: options.travelStyles[0],
     interestsNew: [],
     accommodationType: options.accommodationTypes[0],
     transportationType: "Bus",
-    activityType: [options.activityTypes[0]],
-    cuisineType: options.cuisineTypes[0],
+    activityType: [options.activityTypes[1]],
+    cuisineType: options.cuisineTypes[3],
     tripDuration: "3",
     language: options.languages[0].value,
     feedbacks: [],
