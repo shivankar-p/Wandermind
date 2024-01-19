@@ -90,7 +90,7 @@ const options = {
   ];
 
   var defaultValues = {
-    destinationCountry: "",
+    destinationCountry: "Hawaii",
     budget: "250 USD",
     travelStyle: options.travelStyles[0],
     interestsNew: [],

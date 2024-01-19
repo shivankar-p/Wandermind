@@ -102,6 +102,7 @@ const Loading = styled.p`
   font-weight: bold;
   text-align: center;
   margin: 1rem 0;
+  vertical-align : center;
 
   &::after {
     content: "⏳";

@@ -5,10 +5,15 @@ import os
 from azure.cognitiveservices.vision.computervision import ComputerVisionClient
 from msrest.authentication import CognitiveServicesCredentials
 import requests
+from dotenv import load_dotenv
 
+# Load variables from the .env file
+load_dotenv()
+openai_api_key = os.getenv("OPENAI_API_KEY")
+print(openai_api_key)
 
 # client = OpenAI(api_key='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')
-client = OpenAI(api_key='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')
+client = OpenAI(api_key=openai_api_key)
 
 app = Flask(__name__)
 CORS(app)
@@ -40,8 +45,11 @@ def generate_itinerary():
         prompts = data['prompts']
         responses = data['responses']
 
-        print(len(prompts))
-        print(len(responses))
+        print(prompts)
+        print(responses)
+
+        # print(len(prompts))
+        # print(len(responses))
 
         messages = [
             {"role": "system", "content": "You are a helpful travel assistant."},
@@ -52,7 +60,7 @@ def generate_itinerary():
             if(i != len(prompts)-1):
                 messages.append({"role": "assistant", "content": responses[i]})
         
-        print(messages)
+        # print(messages)
 
         # Make a request to the OpenAI API
         response = client.chat.completions.create(
@@ -78,27 +86,30 @@ def assistant():
         }
         return ('', 204, headers)
 
-    try:
-        # Get the prompt from the request
-        data = request.get_json()['messages']
-        print(data)
+    # try:
+    #     # Get the prompt from the request
+    #     data = request.get_json()['messages']
+    #     # print(data)
 
-        # Make a request to the OpenAI API
-        response = client.chat.completions.create(
-            model="gpt-3.5-turbo",
-            messages=data
-        )
+    #     # Make a request to the OpenAI API
+    #     response = client.chat.completions.create(
+    #         model="gpt-3.5-turbo",
+    #         messages=data
+    #     )
 
 
 
-        gen_response = response.choices[0].message.content
+    #     gen_response = response.choices[0].message.content
 
-        print(gen_response)
+    #     print(gen_response)
 
-        return jsonify({'generated_response': gen_response})
+    #     return jsonify({'generated_response': gen_response})
 
-    except Exception as e:
-        return jsonify({'error': str(e)}), 500
+    # except Exception as e:
+    #     return jsonify({'error': str(e)}), 500
+    hotelsDescription = "- **Northfields Hostel** - Price: $542.55 USD\n\n- **The Captain Cook Hotel** - Price: $620.58 USD\n\n- **Morgan Hotel** - Price: $668.37 USD\n\n- **Lyall Apartment Hotel** - Price: $676.08 USD\n\n- **SACO St Pauls - Red Lion Court** - Price: $1174.03 USD\n"
+
+    return jsonify({'generated_response': hotelsDescription})
     
 @app.route('/update_itinerary', methods=['POST', 'OPTIONS'])
 def update_itinerary():
@@ -149,17 +160,18 @@ def upload():
         }
         return ('', 204, headers)
 
-    print(request.get_json())
-    url = request.get_json()['url']
+    # print(request.get_json())
+    # url = request.get_json()['url']
 
-    if url:
-        landmark_name = get_landmark(url)
+    # if url:
+    #     landmark_name = get_landmark(url)
 
-        if landmark_name:
-            location = get_location(landmark_name)
-            return jsonify({'locality': location})
+    #     if landmark_name:
+    #         location = get_location(landmark_name)
+    #         return jsonify({'locality': location})
 
-    return jsonify({'error': 'Invalid request'})
+    # return jsonify({'error': 'Invalid request'})
+    return jsonify({'locality': 'Hawaii'})
 
 def get_landmark(url):
 
