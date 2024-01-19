@@ -287,10 +287,10 @@ const RegenerateItinerary = () => {
     return (
           <>
           <Container>
-            <Main
+            {/* <Main
                 loading={loading}
                 response={response}
-              />
+              /> */}
 
               <Panel>
               <div style={{marginRight: '1px'}}>
@@ -573,6 +573,10 @@ const RegenerateItinerary = () => {
                   }
                 </FormContainer>
               </Panel>
+              <Main
+                loading={loading}
+                response={response}
+              />
             </Container>
             <div>
                   <PopupChatbot/>

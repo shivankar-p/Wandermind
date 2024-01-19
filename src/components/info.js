@@ -18,9 +18,9 @@ const Itineraryinfo = () => {
   };
 
   return (
-    <div className="img-container">
+    <div className="img-container">s
       <div className="bg-img">
-        <h1 style={{ marginLeft: '600px', background:'000' }}>Wandermind</h1>
+        <h1 style={{ marginLeft: '600px'}}>Wandermind</h1>
         <h4 style={{ marginLeft: '635px' }}>AI travel planner</h4>
         <h1 style={{ marginTop: '50px', marginBottom: '50px', marginLeft: '130px', fontSize: '2em' }}>
         3-Day Hawaiian Paradise: Basking in Nature's Beauty and Coastal Adventures
