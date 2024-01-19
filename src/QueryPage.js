@@ -294,11 +294,11 @@ const RegenerateItinerary = () => {
 
               <Panel>
               <div style={{marginRight: '1px'}}>
-              <img src={logo} alt="Logo" width="200" height="100" />
+              <img src={logo} alt="Logo" width="180" height="90" />
               </div>
                 <FormContainer onSubmit={handleSubmit}>
                   <Label htmlFor="destinationCountry">Destination Country</Label>
-                  <div style={{alignItems: 'center', display: 'flex', marginTop: '-20px'}}>
+                  <div style={{alignItems: 'center', display: 'flex', marginTop: '-25px'}}>
                   <Input
                     type="text"
                     placeholder="e.g. San Francisco/USA, Paris/France, Istanbul/Turkey, etc."
@@ -308,7 +308,7 @@ const RegenerateItinerary = () => {
                     onChange={handleChange}
                     required
                   />
-                  <button className="next-button" onClick={handleButtonClick} style={{marginBottom: '15px', display: 'inline-block', textAlign: 'center', textDecoration: 'none'}}>
+                  <button className="next-button" onClick={handleButtonClick} style={{marginBottom: '15px', display: 'inline-block', textAlign: 'center', textDecoration: 'none', marginLeft: '5px'}}>
                     {(!uploading) ? <AttachFileIcon/> : (<LoadingIcons.TailSpin width={20} height={20}/>)}
                   </button>
                   </div>

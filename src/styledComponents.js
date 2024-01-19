@@ -23,6 +23,8 @@ const Container = styled.div`
 `;
 
 const MainContent = styled.div`
+  margin-left:auto;
+  margin-right:-13px;
   flex-basis: 70%;
   display: flex;
   flex-direction: column;
@@ -253,7 +255,7 @@ const TopLocationContainer = styled.div`
   justify-content: flex-start;
   align-items: center;
   flex-wrap: wrap;
-  margin-bottom: 0.4rem;
+  margin-bottom: 0.3rem;
   margin-top: -1rem;
 `;
 
@@ -263,7 +265,7 @@ const LanguageOption = styled.div`
   flex-direction: column;
   align-items: center;
   margin-right: 0.2rem;
-  padding: 0.4rem;
+  padding: 0.2rem;
   border-radius: 0.4rem;
   cursor: pointer;
   transition: border-color 0.2s ease-in-out;
@@ -371,7 +373,7 @@ const Panel = styled.div`
   position: fixed;
   width: 28%;
   top: 0;
-  right: 0;
+  left: 0;
   overflow-y: auto;
 
   @media screen and (max-width: 1320px) {
@@ -392,6 +394,7 @@ const Panel = styled.div`
     position: relative;
   }
 `;
+
 
 const CuisineTypesContainer = styled.div`
   display: flex;

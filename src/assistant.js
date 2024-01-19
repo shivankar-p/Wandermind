@@ -55,7 +55,7 @@ const PopupChatbot = () => {
   return (
     <div className="popup-chatbot">
         <button className="chat-button" onClick={toggleChat}>
-          <img src={msg} alt="assistant" width="30" height="30"/>
+          <img src={msg} alt="assistant" width="25" height="25"/>
         </button>
       {isOpen && (
         <div className="chat-container">
