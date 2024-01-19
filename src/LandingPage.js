@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from "react-router-dom";
 import GoogleAuth from './components/GoogleAuth';
 
-import './LandingPage.css';
+
 
 import bgVid from './assets/bg.mp4';
 import logo from './assets/tbo_logo.svg';
@@ -10,6 +10,8 @@ import instagram from './assets/insta.svg';
 import twitter from './assets/twitter.png';
 import mail from './assets/mail.svg';
 import arrowIcon from './assets/play-512.png';
+import Nav from './Nav/header'
+import Hero from './Nav/hero'
 
 
 
@@ -20,7 +22,9 @@ const placesData = ["Milano, Italy", "Paris, France", "Dubai, UAE", "Goa, India"
                     "Rome, Italy",  "Istanbul, Turkey",  "Las Vegas, US",  "Shangai, China",  "Singapore",
                     "Sydney, Australia",  "Miami, US",  "Amsterdam",  "Tokyo",  "Chennai, India"];
   return (
-    <div className="landing-page">
+    <>
+    <Hero />
+    {/* <div className="landing-page">
       <div className="top-area">
         <div className="logo">
           <img src={logo} alt="Logo" width="200" height="100" />
@@ -40,7 +44,7 @@ const placesData = ["Milano, Italy", "Paris, France", "Dubai, UAE", "Goa, India"
       </video>
       <div className="overlay"></div>
       <div className="content">
-        <h1>Wandermind</h1>
+      <h1 class="display-1">Wandermind</h1>
         <h3>Your AI-powered travel companion</h3>
         <Link to = '/query'>
         <button className="next-button">
@@ -58,7 +62,8 @@ const placesData = ["Milano, Italy", "Paris, France", "Dubai, UAE", "Goa, India"
           ))}
         </div>
         </div>
-    </div>
+    </div> */}
+    </>
   );
 };
 

@@ -2,7 +2,7 @@ body, html {
     margin: 0;
     padding: 0;
     height: 100%;
-    overflow: auto;
+    overflow: hidden;
   }
   
   .landing-page {
@@ -24,7 +24,7 @@ body, html {
   }
   
   .overlay {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
@@ -69,19 +69,7 @@ body, html {
     margin-left: 15px;
   }
   
-  .content h1 {
-      font-size: 2.5em; /* Adjust the size as needed */
-      font-weight: bold;
-      color: #fff; /* Adjust the color as needed */
-    }
-  
-    .content h2 {
-      font-size: 2em; /* Adjust the size as needed */
-      font-weight: bold;
-      color: #fff; /* Adjust the color as needed */
-    }
-  
-  /* ... Other styles */
+
   
   .trending-places {
     position: absolute;

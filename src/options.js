@@ -89,7 +89,7 @@ const options = {
     // add more top locations as needed
   ];
 
-  const defaultValues = {
+  var defaultValues = {
     destinationCountry: "",
     budget: "250 USD",
     travelStyle: options.travelStyles[0],
@@ -105,4 +105,9 @@ const options = {
     feedback: ""
   };
 
-export {options, topLocations, defaultValues};
+const addDest = (des) => {
+  console.log(des);
+  defaultValues.destinationCountry = des;
+}
+
+export {options, topLocations, defaultValues, addDest};

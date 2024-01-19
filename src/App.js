@@ -10,10 +10,12 @@ import QueryPage from "./QueryPage";
 import GoogleAuth from "./components/GoogleAuth";
 import Timeline from "./timeline";
 import { Avatar } from './components/Avatar';
+import Nav from './Nav/header'
 
 const App = () => {
   return (
     <Router>
+          {/* <Nav /> */}
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/query" element={<QueryPage />} />
